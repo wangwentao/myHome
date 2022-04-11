@@ -1,6 +1,8 @@
 package models
 
-import "github.com/silenceper/wechat/v2/miniprogram/auth"
+import (
+	"github.com/silenceper/wechat/v2/miniprogram/auth"
+)
 
 type WxUserSession struct {
 	auth.ResCode2Session

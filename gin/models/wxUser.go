@@ -1,6 +1,7 @@
 package models
 
 type WxUser struct {
+	PGBaseModel
 	OpenID    string `json:"openId,omitempty" gorm:"primarykey"`
 	UnionID   string `json:"unionId,omitempty"`
 	NickName  string `json:"nickName"`

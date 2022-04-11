@@ -3,7 +3,15 @@ package utils
 import (
 	"github.com/jinzhu/copier"
 	"myHome/gin/utils/logs"
+	"time"
 )
+
+var nilTime = time.Time{}
+
+func IsNilTime(t time.Time) bool {
+
+	return t == nilTime
+}
 
 func Copy(toValue interface{}, fromValue interface{}) {
 

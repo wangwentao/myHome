@@ -4,7 +4,6 @@ import (
 	"context"
 	"myHome/gin/models"
 	"myHome/gin/services/stores"
-	"myHome/gin/utils"
 	"myHome/gin/utils/logs"
 )
 
@@ -16,10 +15,17 @@ func MiniProLogin(ctx context.Context, s *models.WxUserSession) string {
 		OpenID:  s.OpenID,
 		UnionID: s.UnionID,
 	}
-	err := stores.NewWxUser(wxUser)
-	utils.CheckErr(err)
+
+	err := stores.NewModel(wxUser)
+	logs.Error(err).Msg("Create new user")
 
 	return sid
+}
+
+func SaveUserProfile(user *models.WxUser) error {
+
+	err := stores.UpdateModel(user)
+	return err
 }
 
 func SessionExist(ctx context.Context, sid string) bool {
@@ -34,12 +40,6 @@ func RemoveExpeiredSession(ctx context.Context, sid string) {
 	if SessionExist(ctx, sid) {
 		stores.DelExpeiredSession(ctx, sid)
 	}
-}
-
-func SaveUserProfile(user *models.WxUser) error {
-
-	err := stores.UpdateWxUser(user)
-	return err
 }
 
 func FindWxSessionKey(ctx context.Context, sid string) (o string, s string) {

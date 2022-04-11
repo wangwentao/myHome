@@ -2,7 +2,6 @@ package logs
 
 import (
 	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/pkgerrors"
 	"os"
 	"time"
 )
@@ -14,7 +13,7 @@ var (
 
 func InitLogger(level zerolog.Level) {
 
-	zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
+	//zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
 	zerolog.SetGlobalLevel(level)
 
 	stdout := zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: time.RFC3339}
@@ -52,15 +51,27 @@ func Trace() *zerolog.Event {
 
 func Error(err error) *zerolog.Event {
 
-	return errLogger.Error().Stack().Err(err)
+	evt := logger.Trace()
+	if err != nil {
+		evt = errLogger.Error().Err(err)
+	}
+	return evt
 }
 
 func Fatal(err error) *zerolog.Event {
 
-	return errLogger.Fatal().Stack().Err(err)
+	evt := logger.Trace()
+	if err != nil {
+		evt = errLogger.Fatal().Err(err)
+	}
+	return evt
 }
 
 func Panic(err error) *zerolog.Event {
 
-	return errLogger.Panic().Stack().Err(err)
+	evt := logger.Trace()
+	if err != nil {
+		evt = errLogger.Panic().Err(err)
+	}
+	return evt
 }
