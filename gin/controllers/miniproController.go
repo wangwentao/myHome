@@ -17,14 +17,7 @@ func MiniLogin(c *gin.Context) {
 	code := c.Query("code")
 	logs.Trace().Msgf("miniprogram jsCOde : %s", code)
 
-	au := configs.MiniPro.GetAuth()
-	res, err := au.Code2Session(code)
-	logs.Error(err).Msg("Use jsCode Call Code2Session function")
-
-	sek := &models.WxUserSession{ResCode2Session: res}
-	sid := services.MiniProLogin(c, sek)
-
-	services.RemoveExpeiredSession(c, osid)
+	sid := services.MiniProLogin(c, code, osid)
 
 	logs.Info().Msg("Mini progrogram login end")
 	c.JSON(http.StatusOK, gin.H{

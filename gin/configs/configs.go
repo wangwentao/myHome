@@ -1,13 +1,15 @@
 package configs
 
 import (
-	"context"
 	"github.com/go-redis/redis/v8"
 	"github.com/rs/zerolog"
 	"github.com/silenceper/wechat/v2"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"myHome/gin/configs/nacos"
 	"myHome/gin/utils/logs"
+	"os"
+	"os/signal"
 
 	// "github.com/jackc/pgx/v4/pgxpool"
 	"github.com/silenceper/wechat/v2/cache"
@@ -22,14 +24,20 @@ var (
 	MiniPro    *miniprogram.MiniProgram
 )
 
-func InitSettings(ctx context.Context) {
+func InitSettings() {
 
 	// init yaml config must be first
 	err := setupSetting()
-	utils.CheckErr(err)
+	logs.Error(err).Msg("Setup yaml config settings")
 
 	// init log system
 	logs.InitLogger(zerolog.TraceLevel)
+
+	// handler ctrl+c sign
+	SetupCLearHandler()
+
+	// nacos
+	nacos.RegisterNacosService()
 
 	// init miniprogram
 	initMiniProgram()
@@ -54,7 +62,21 @@ func InitSettings(ctx context.Context) {
 
 }
 
-func ReleaseSettings(ctx context.Context) {
+func SetupCLearHandler() {
+	c := make(chan os.Signal, 2)
+	signal.Notify(c, os.Interrupt, os.Kill)
+
+	go func() {
+		sig := <-c
+		logs.Info().Msgf("system been interrupted by %s", sig)
+		ReleaseSettings()
+		os.Exit(0)
+	}()
+}
+
+func ReleaseSettings() {
+
+	nacos.DeregisterNacosService()
 
 	if RedisStore != nil {
 		err := RedisStore.Close()

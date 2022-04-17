@@ -2,22 +2,33 @@ package services
 
 import (
 	"context"
+	"myHome/gin/configs"
 	"myHome/gin/models"
 	"myHome/gin/services/stores"
 	"myHome/gin/utils/logs"
 )
 
-func MiniProLogin(ctx context.Context, s *models.WxUserSession) string {
+func MiniProLogin(ctx context.Context, jsCode string, osid string) string {
 
-	sid := stores.StoreWxSession(ctx, s)
+	au := configs.MiniPro.GetAuth()
+	res, err := au.Code2Session(jsCode)
+	logs.Error(err).Msg("Use jsCode Call Code2Session function")
+
+	sek := &models.WxUserSession{ResCode2Session: res}
+	sid := stores.StoreWxSession(ctx, sek)
 
 	wxUser := &models.WxUser{
-		OpenID:  s.OpenID,
-		UnionID: s.UnionID,
+		OpenID:  sek.OpenID,
+		UnionID: sek.UnionID,
 	}
 
-	err := stores.NewModel(wxUser)
+	err = stores.NewModel(wxUser)
 	logs.Error(err).Msg("Create new user")
+
+	//delete expeired user session id from redis
+	if len(osid) > 0 {
+		RemoveExpeiredSession(ctx, osid)
+	}
 
 	return sid
 }
