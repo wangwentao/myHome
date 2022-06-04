@@ -2,11 +2,11 @@ package nacos
 
 import (
 	"fmt"
-	"github.com/nacos-group/nacos-sdk-go/clients"
-	"github.com/nacos-group/nacos-sdk-go/clients/config_client"
-	"github.com/nacos-group/nacos-sdk-go/clients/naming_client"
-	"github.com/nacos-group/nacos-sdk-go/common/constant"
-	"github.com/nacos-group/nacos-sdk-go/vo"
+	"github.com/nacos-group/nacos-sdk-go/v2/clients"
+	"github.com/nacos-group/nacos-sdk-go/v2/clients/config_client"
+	"github.com/nacos-group/nacos-sdk-go/v2/clients/naming_client"
+	"github.com/nacos-group/nacos-sdk-go/v2/common/constant"
+	"github.com/nacos-group/nacos-sdk-go/v2/vo"
 )
 
 var (
@@ -32,6 +32,17 @@ func DeregisterNacosService() {
 		//GroupName:   "group-a",   // default value is DEFAULT_GROUP
 	})
 	fmt.Println(success, err)
+
+	namingClient.CloseClient()
+	/*success, err = namingClient.DeregisterInstance(vo.DeregisterInstanceParam{
+		Ip:          "localhost",
+		Port:        8881,
+		ServiceName: "ping",
+		Ephemeral:   true,
+		//Cluster:     "cluster-a", // default value is DEFAULT
+		//GroupName:   "group-a",   // default value is DEFAULT_GROUP
+	})
+	fmt.Println(success, err)*/
 }
 
 func registerService() {
@@ -48,6 +59,20 @@ func registerService() {
 		//GroupName:   "group-a",   // 默认值DEFAULT_GROUP
 	})
 	fmt.Println(success, errR)
+
+	/*success, errR = namingClient.RegisterInstance(vo.RegisterInstanceParam{
+		Ip:          "localhost",
+		Port:        8881,
+		ServiceName: "ping",
+		Weight:      10,
+		Enable:      true,
+		Healthy:     true,
+		Ephemeral:   true,
+		Metadata:    map[string]string{"path": "/home/ping"},
+		//ClusterName: "cluster-a", // 默认值DEFAULT
+		//GroupName:   "group-a",   // 默认值DEFAULT_GROUP
+	})
+	fmt.Println(success, errR)*/
 }
 
 func configNcosClient() {
@@ -80,11 +105,11 @@ func configNcosClient() {
 	)
 	fmt.Println(err)
 
-	configClient, err = clients.NewConfigClient(
+	/*configClient, err = clients.NewConfigClient(
 		vo.NacosClientParam{
 			ClientConfig:  &clientConfig,
 			ServerConfigs: serverConfigs,
 		},
 	)
-	fmt.Println(err)
+	fmt.Println(err)*/
 }

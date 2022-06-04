@@ -51,6 +51,7 @@ func initNacos() {
 		},
 	)
 	fmt.Println(err)
+
 }
 
 func main() {

@@ -15,6 +15,7 @@ import (
 func main() {
 
 	configs.InitSettings()
+	defer configs.ReleaseSettings()
 
 	engine := router.SetupRouter()
 	err := engine.Run(":" + configs.Server.HttpPort)

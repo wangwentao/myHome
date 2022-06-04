@@ -1,12 +1,14 @@
 package router
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	sf "github.com/swaggo/files"
 	gs "github.com/swaggo/gin-swagger"
 	"myHome/gin/configs"
 	"myHome/gin/controllers"
 	_ "myHome/gin/docs"
+	"myHome/gin/services/remote"
 	"net/http"
 )
 
@@ -30,8 +32,8 @@ func SetupRouter() *gin.Engine {
 	home := router.Group("/home")
 	{
 		home.GET("/", homeFunc)
-
 		home.GET("/ping", pingFunc)
+		home.GET("/hello", helloFunc())
 	}
 
 	// swagger handler
@@ -69,9 +71,23 @@ func homeFunc(c *gin.Context) {
 
 // @Summary myHome project test api
 // @Tags home
-// @Success 200 string json pong
+// @Param name query string true "name"
+// @Success 200 string pong
 // @Router /home/ping [Get]
 func pingFunc(c *gin.Context) {
 
-	c.String(http.StatusOK, "pong")
+	name := c.Query("name")
+	c.String(http.StatusOK, fmt.Sprintf("Hello %s", name))
+}
+
+// @Summary myHome project go-kit api
+// @Tags home
+// @Param name query string true "name"
+// @Success 200 string json say hello
+// @Router /home/hello [Get]
+func helloFunc() gin.HandlerFunc {
+
+	helloTransport := remote.NewHelloTransport()
+	helloHandler := gin.WrapH(helloTransport)
+	return helloHandler
 }

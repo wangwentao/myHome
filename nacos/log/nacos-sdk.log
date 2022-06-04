@@ -1,0 +1,20 @@
+2022-04-17T03:20:42.420+0800	[34mINFO[0m	naming_client/push_receiver.go:80	udp server start, port: 54984
+2022-04-17T03:20:42.420+0800	[34mINFO[0m	nacos_client/nacos_client.go:79	logDir:<./nacos/log>   cacheDir:<./nacos/cache>
+2022-04-17T03:20:42.421+0800	[34mINFO[0m	util/common.go:94	Local IP:192.168.3.28
+2022-04-17T03:20:42.555+0800	[33mWARN[0m	util/common.go:43	instance list is empty,json string:{"name":"DEFAULT_GROUP@@ping","groupName":"DEFAULT_GROUP","clusters":"","cacheMillis":10000,"hosts":[],"lastRefTime":1650136842494,"checksum":"","allIPs":false,"reachProtectionThreshold":false,"valid":true}
+2022-04-17T03:20:42.555+0800	[34mINFO[0m	naming_client/host_reactor.go:95	service not found in cache DEFAULT_GROUP@@ping
+2022-04-17T13:58:06.373+0800	[34mINFO[0m	naming_client/push_receiver.go:80	udp server start, port: 55746
+2022-04-17T13:58:06.373+0800	[34mINFO[0m	nacos_client/nacos_client.go:79	logDir:<./nacos/log>   cacheDir:<./nacos/cache>
+2022-04-17T13:58:06.374+0800	[34mINFO[0m	util/common.go:94	Local IP:192.168.3.28
+2022-04-17T13:58:06.393+0800	[34mINFO[0m	naming_client/host_reactor.go:95	service not found in cache DEFAULT_GROUP@@ping
+2022-04-17T14:01:31.129+0800	[34mINFO[0m	naming_client/push_receiver.go:80	udp server start, port: 55893
+2022-04-17T14:01:31.129+0800	[34mINFO[0m	nacos_client/nacos_client.go:79	logDir:<./nacos/log>   cacheDir:<./nacos/cache>
+2022-04-17T14:01:31.130+0800	[34mINFO[0m	util/common.go:94	Local IP:192.168.3.28
+2022-04-17T14:01:31.138+0800	[34mINFO[0m	naming_client/host_reactor.go:95	service not found in cache DEFAULT_GROUP@@ping
+2022-04-17T14:09:36.661+0800	[34mINFO[0m	naming_client/push_receiver.go:121	receive push: {"type":"dom","data":"{\"name\":\"DEFAULT_GROUP@@ping\",\"clusters\":\"\",\"cacheMillis\":10000,\"hosts\":[{\"instanceId\":\"localhost#8880#DEFAULT#DEFAULT_GROUP@@ping\",\"ip\":\"localhost\",\"port\":8880,\"weight\":10.0,\"healthy\":true,\"enabled\":true,\"ephemeral\":true,\"clusterName\":\"DEFAULT\",\"serviceName\":\"DEFAULT_GROUP@@ping\",\"metadata\":{\"path\":\"/home/ping\"},\"instanceHeartBeatInterval\":5000,\"instanceHeartBeatTimeOut\":15000,\"ipDeleteTimeout\":30000}],\"lastRefTime\":1650175291671,\"checksum\":\"\",\"allIPs\":false,\"reachProtectionThreshold\":false,\"valid\":true}","lastRefTime":4033518173629} from: 172.19.0.2:54787
+2022-04-17T14:14:05.907+0800	[34mINFO[0m	naming_client/push_receiver.go:80	udp server start, port: 55748
+2022-04-17T14:14:05.907+0800	[34mINFO[0m	nacos_client/nacos_client.go:79	logDir:<./nacos/log>   cacheDir:<./nacos/cache>
+2022-04-17T14:14:05.907+0800	[34mINFO[0m	util/common.go:94	Local IP:192.168.3.28
+2022-04-17T14:14:05.912+0800	[34mINFO[0m	naming_client/host_reactor.go:95	service not found in cache DEFAULT_GROUP@@ping
+2022-04-17T14:18:03.297+0800	[34mINFO[0m	util/common.go:94	Local IP:192.168.3.28
+2022-04-17T14:18:03.311+0800	[34mINFO[0m	naming_client/host_reactor.go:95	service not found in cache DEFAULT_GROUP@@ping
