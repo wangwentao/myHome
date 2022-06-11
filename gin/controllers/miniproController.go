@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"myHome/gin/configs"
-	"myHome/gin/models"
+	"myHome/gin/models/webchat"
 	"myHome/gin/services"
 	"myHome/gin/utils"
 	"myHome/gin/utils/logs"
@@ -28,7 +28,7 @@ func MiniLogin(c *gin.Context) {
 func UserProfile(c *gin.Context) {
 
 	sid := c.GetHeader("sessionId")
-	rp := models.WxPutProfile{}
+	rp := webchat.WxPutProfile{}
 	err := c.BindJSON(&rp)
 	logs.Error(err).Msg("Bind request json to struct")
 
@@ -40,7 +40,7 @@ func UserProfile(c *gin.Context) {
 	logs.Error(deer).Msgf("Decrypt data: %+v", data)
 
 	// save user profile
-	user := models.WxUser{}
+	user := webchat.WxUser{}
 	utils.Copy(&user, &data)
 	if len(user.OpenID) == 0 {
 		user.OpenID = oid

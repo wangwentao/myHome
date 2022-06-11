@@ -1,7 +1,9 @@
-package models
+package webchat
+
+import "myHome/gin/models"
 
 type WxUser struct {
-	PGBaseModel
+	models.PGBaseModel
 	OpenID    string `json:"openId,omitempty" gorm:"primarykey"`
 	UnionID   string `json:"unionId,omitempty"`
 	NickName  string `json:"nickName"`

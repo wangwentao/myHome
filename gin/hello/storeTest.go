@@ -168,9 +168,9 @@ func ormQuery() {
 }
 
 func main() {
-	configs.InitSettings(ctx)
+	configs.InitSettings()
 
-	defer configs.ReleaseSettings(ctx)
+	defer configs.ReleaseSettings()
 
 	//testRedis()
 	//testPgSQL()

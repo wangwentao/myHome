@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/silenceper/wechat/v2/miniprogram/encryptor"
-	"myHome/gin/models"
+	"myHome/gin/models/webchat"
 	"myHome/gin/utils"
 )
 
@@ -23,7 +23,7 @@ func main() {
 		AvatarURL: "---",
 	}
 
-	user := models.WxUser{}
+	user := webchat.WxUser{}
 
 	utils.Copy(&user, &data)
 

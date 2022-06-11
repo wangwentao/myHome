@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/silenceper/wechat/v2/miniprogram/auth"
 	"myHome/gin/configs"
-	"myHome/gin/models"
+	"myHome/gin/models/webchat"
 	"myHome/gin/utils"
 	"myHome/gin/utils/logs"
 )
@@ -14,7 +14,7 @@ const (
 	wxSessionKey = "sessionkey"
 )
 
-func StoreWxSession(ctx context.Context, s *models.WxUserSession) string {
+func StoreWxSession(ctx context.Context, s *webchat.WxUserSession) string {
 
 	sid := utils.GetUUID()
 
@@ -28,7 +28,7 @@ func StoreWxSession(ctx context.Context, s *models.WxUserSession) string {
 	return sid
 }
 
-func FindWxSession(ctx context.Context, sid string) *models.WxUserSession {
+func FindWxSession(ctx context.Context, sid string) *webchat.WxUserSession {
 
 	openid, err := configs.RedisStore.HGet(ctx, sid, wxOpenID).Result()
 	utils.CheckErr(err)
@@ -40,7 +40,7 @@ func FindWxSession(ctx context.Context, sid string) *models.WxUserSession {
 		SessionKey: sek,
 	}
 
-	return &models.WxUserSession{ResCode2Session: wxse}
+	return &webchat.WxUserSession{ResCode2Session: wxse}
 }
 
 func DelExpeiredSession(ctx context.Context, sid string) {

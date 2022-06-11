@@ -6,7 +6,6 @@ import (
 	"github.com/silenceper/wechat/v2"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"myHome/gin/configs/nacos"
 	"myHome/gin/utils/logs"
 	"os"
 	"os/signal"
@@ -37,7 +36,7 @@ func InitSettings() {
 	SetupCLearHandler()
 
 	// nacos
-	nacos.RegisterNacosService()
+	// nacos.RegisterNacosService()
 
 	// init miniprogram
 	initMiniProgram()
@@ -76,7 +75,7 @@ func SetupCLearHandler() {
 
 func ReleaseSettings() {
 
-	nacos.DeregisterNacosService()
+	// nacos.DeregisterNacosService()
 
 	if RedisStore != nil {
 		err := RedisStore.Close()

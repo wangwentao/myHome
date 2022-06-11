@@ -3,7 +3,7 @@ package services
 import (
 	"context"
 	"myHome/gin/configs"
-	"myHome/gin/models"
+	"myHome/gin/models/webchat"
 	"myHome/gin/services/stores"
 	"myHome/gin/utils/logs"
 )
@@ -14,10 +14,10 @@ func MiniProLogin(ctx context.Context, jsCode string, osid string) string {
 	res, err := au.Code2Session(jsCode)
 	logs.Error(err).Msg("Use jsCode Call Code2Session function")
 
-	sek := &models.WxUserSession{ResCode2Session: res}
+	sek := &webchat.WxUserSession{ResCode2Session: res}
 	sid := stores.StoreWxSession(ctx, sek)
 
-	wxUser := &models.WxUser{
+	wxUser := &webchat.WxUser{
 		OpenID:  sek.OpenID,
 		UnionID: sek.UnionID,
 	}
@@ -33,7 +33,7 @@ func MiniProLogin(ctx context.Context, jsCode string, osid string) string {
 	return sid
 }
 
-func SaveUserProfile(user *models.WxUser) error {
+func SaveUserProfile(user *webchat.WxUser) error {
 
 	err := stores.UpdateModel(user)
 	return err

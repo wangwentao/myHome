@@ -1,4 +1,4 @@
-package models
+package webchat
 
 import (
 	"github.com/silenceper/wechat/v2/miniprogram/auth"
