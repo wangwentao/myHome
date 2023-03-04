@@ -21,7 +21,7 @@ func main() {
 
 func genMemberScore() {
 	ms := &score.MemberScore{
-		MemberId:   "729c459f-36aa-4167-bb7e-dc260bbc0b88",
+		MemberId:   "59c305fb-ab17-4e02-9bf5-6608e2d234c7",
 		MemberName: "王子安",
 		Score:      0,
 	}
@@ -35,6 +35,7 @@ func genMemberData() {
 		MemberName:     "文涛",
 		MemberType:     "dad",
 		MemberTypeDesc: "爸爸",
+		ScoreStatus:    0,
 	}
 	stores.NewModel(f)
 	m := &sys.Member{
@@ -43,6 +44,7 @@ func genMemberData() {
 		MemberName:     "睿睿",
 		MemberType:     "mom",
 		MemberTypeDesc: "妈妈",
+		ScoreStatus:    0,
 	}
 	stores.NewModel(m)
 
@@ -52,6 +54,7 @@ func genMemberData() {
 		MemberName:     "王子安",
 		MemberType:     "children",
 		MemberTypeDesc: "孩子",
+		ScoreStatus:    1,
 	}
 	stores.NewModel(c)
 

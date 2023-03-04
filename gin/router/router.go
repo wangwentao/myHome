@@ -26,8 +26,6 @@ func SetupRouter() *gin.Engine {
 		mini.POST("/profile", controllers.UserProfile)
 	}
 
-	//router.GET("/mini/login", controllers.MiniLogin)
-
 	// web
 	home := router.Group("/home")
 	{

@@ -9,6 +9,7 @@ type Member struct {
 	MemberName     string
 	MemberType     string
 	MemberTypeDesc string
+	ScoreStatus    int
 	OpenId         string
 }
 
